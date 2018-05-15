@@ -65,7 +65,7 @@ void DataPacket::setPacket(Data &metaData , TrainCmd m_trainCmd)
 	m_packetData += 0xBB;
 }
 
-QByteArray DataPacket::getPcaket()
+QByteArray DataPacket::getPacket()
 {
 	return m_packetData;
 }

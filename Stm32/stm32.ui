@@ -180,6 +180,19 @@
      <string>TextLabel</string>
     </property>
    </widget>
+   <widget class="QLabel" name="trafficLabel2">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>500</y>
+      <width>521</width>
+      <height>201</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>通信状态：</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

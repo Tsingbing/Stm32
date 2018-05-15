@@ -45,6 +45,7 @@ public:
     QLabel *label;
     QLabel *label_2;
     QLabel *showDataLabel;
+    QLabel *trafficLabel2;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -98,6 +99,9 @@ public:
         showDataLabel = new QLabel(centralWidget);
         showDataLabel->setObjectName(QStringLiteral("showDataLabel"));
         showDataLabel->setGeometry(QRect(690, 110, 271, 571));
+        trafficLabel2 = new QLabel(centralWidget);
+        trafficLabel2->setObjectName(QStringLiteral("trafficLabel2"));
+        trafficLabel2->setGeometry(QRect(100, 500, 521, 201));
         Stm32Class->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(Stm32Class);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -127,6 +131,7 @@ public:
         label->setText(QApplication::translate("Stm32Class", "\346\216\245\346\224\266\346\225\260\346\215\256\357\274\232", Q_NULLPTR));
         label_2->setText(QApplication::translate("Stm32Class", "\346\250\241\346\213\237\347\224\237\344\272\247\346\225\260\346\215\256\357\274\232", Q_NULLPTR));
         showDataLabel->setText(QApplication::translate("Stm32Class", "TextLabel", Q_NULLPTR));
+        trafficLabel2->setText(QApplication::translate("Stm32Class", "\351\200\232\344\277\241\347\212\266\346\200\201\357\274\232", Q_NULLPTR));
     } // retranslateUi
 
 };

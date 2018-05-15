@@ -33,6 +33,8 @@ private:
 	SlaveThread thread;
 	Data simulateData;
 	DataPacket m_dataPacket;
+	Data_STATEACK_TypeDef DataStateAck;
+	Data_MOVE_TypeDef DataMove;//
 
 	QByteArray m_reponseData;
 	QByteArray m_requestData;

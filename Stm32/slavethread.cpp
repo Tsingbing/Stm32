@@ -86,6 +86,10 @@ void SlaveThread::setResponseData(QByteArray responseData)
 {
 	m_responseData = responseData;
 }
+QByteArray SlaveThread::getRequestData()
+{
+	return m_requestData;
+}
 QByteArray SlaveThread::getResponseData()
 {
 	return m_requestData;

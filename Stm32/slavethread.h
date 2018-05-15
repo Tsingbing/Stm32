@@ -67,6 +67,7 @@ public:
     void startSlave(const QString &portName, int waitTimeout, const QString &response);
     void run() Q_DECL_OVERRIDE;
 	void setResponseData(QByteArray responseData);
+	QByteArray getRequestData();
 	QByteArray getResponseData();
 signals:
     void request(const QString &s);

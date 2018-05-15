@@ -45,10 +45,60 @@ void Stm32::showRequest(const QString & s)
 	m_requestData = thread.getResponseData();
 	ui.responseLineEdit->setText(m_requestData.toHex(':'));
 
-	ui.trafficLabel->setText(tr("Traffic, transaction #%1:"
-		"\n\r-request: %2"
-		"\n\r-response: %3")
-		.arg(++transactionCount).arg(s).arg(ui.responseLineEdit->text()));
+	/////////////////////////////////////////////////////////////////////解析代码
+
+	if (m_requestData[0] == (char)0xaa && m_requestData[m_requestData.size() - 1] == (char)0xbb)
+	{
+		switch (m_requestData[4])
+		{
+		case CMD_MOVE: //0
+			memcpy(&DataMove, m_requestData.data() + 5, m_requestData[1] - 6);//截取字节段copy到结构体。
+			break;
+		case CMD_STATE:
+			//memcpy(&DataStateAck, m_requestData.data() + 5, m_requestData[1] - 6);//截取字节段copy到结构体。
+			break;
+		case CMD_FORMATE:
+
+			break;
+		case CMD_LASERCONTROL:
+
+			break;
+		case CMD_PICTUREINF:
+
+			break;
+		case CMD_GPSCOORD:
+
+			break;
+		case CMD_SOUNDCONTROL:
+
+			break;
+		case CMD_DOWNLOADCONTROL:
+
+			break;
+		default:
+			break;
+		}
+	}
+	/////////////////////////////////////////////////////////////////////
+	ui.trafficLabel->setText(tr("Traffic, transaction #%1:")
+		.arg(++transactionCount));
+
+	ui.trafficLabel2->setText(tr(
+		"\n\r-DataMove.Speed: %1"
+		"\n\r-DataMove.Direction: %2"
+		"\n\r-DataMove.lightpower: %3"
+		"\n\r-DataMove.Deepset: %4"
+		"\n\r-DataMove.Roll: %5"
+		"\n\r-DataMove.Yaw: %6"
+	)
+		.arg((int)(DataMove.Speed		))
+		.arg((int)(DataMove.Direction	))
+		.arg((int)(DataMove.lightpower  )) 
+		.arg((int)(DataMove.Deepset		))
+		.arg((int)(DataMove.Roll		))	
+		.arg((int)(DataMove.Yaw			))
+	);
+
 }
 
 void Stm32::processError(const QString &s)
@@ -71,19 +121,19 @@ void Stm32::activateRunButton()
 void Stm32::showSimulateData()
 {
 	ui.showDataLabel->setText(tr(
-		"\n\r-DatastateAck.speed	 : %1"
-		"\n\r-DatastateAck.Direction : %2"
-		"\n\r-DatastateAck.Power     : %3"
-		"\n\r-DatastateAck.Temp      : %4"
-		"\n\r-DatastateAck.Hum		 : %5"
-		"\n\r-DatastateAck.Roll		 : %6"
-		"\n\r-DatastateAck.pitch	 : %7"
-		"\n\r-DatastateAck.Yaw		 : %8"
-		"\n\r-DatastateAck.pointID	 : %9"
-		"\n\r-DatastateAck.v         : %10"
-		"\n\r-DatastateAck.NowDeepth : %11"
-		"\n\r-DatastateAck.point.x	 : %12"
-		"\n\r-DatastateAck.point.y   : %13"
+		"\n\r-DatastateAck.speed: %1"
+		"\n\r-DatastateAck.Direction: %2"
+		"\n\r-DatastateAck.Power: %3"
+		"\n\r-DatastateAck.Temp: %4"
+		"\n\r-DatastateAck.Hum: %5"
+		"\n\r-DatastateAck.Roll: %6"
+		"\n\r-DatastateAck.pitch: %7"
+		"\n\r-DatastateAck.Yaw: %8"
+		"\n\r-DatastateAck.pointID: %9"
+		"\n\r-DatastateAck.v: %10"
+		"\n\r-DatastateAck.NowDeepth: %11"
+		"\n\r-DatastateAck.point.x: %12"
+		"\n\r-DatastateAck.point.y: %13"
 	    )
 		.arg((int)(simulateData.DatastateAck.speed)	  )
 		.arg((int)(simulateData.DatastateAck.Direction))
@@ -101,7 +151,7 @@ void Stm32::showSimulateData()
 	   );
 
 	m_dataPacket.setPacket(simulateData, CMD_STATE);
-	m_reponseData = m_dataPacket.getPcaket();
+	m_reponseData = m_dataPacket.getPacket();
 	thread.setResponseData(m_reponseData);
 }
 

@@ -10,7 +10,8 @@ public:
 	~DataPacket();
 
 	void setPacket(Data &metaData, TrainCmd trainCmd);
-	QByteArray getPcaket();
+	QByteArray getPacket();
+
 private:
 	Data metaData;
 	TrainCmd m_trainCmd;
